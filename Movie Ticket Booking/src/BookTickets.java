@@ -202,8 +202,8 @@ public class BookTickets{
         return theaterSeats;
     }
     
-    public static void theaterMovie(long userId){
-        try(Scanner sc = new Scanner(System.in)){
+    public static void theaterMovie(long userId) throws ParseException{
+        Scanner sc = new Scanner(System.in);
             printTheaters();
         System.out.println("Select Your Theater to book Tickets:");
         int theaterId = sc.nextInt();
@@ -288,19 +288,11 @@ public class BookTickets{
              booking = new Booking(userId, theaterId, userMovie.getMovieId(), userScreenNo,new String[]{String.valueOf(noOfSeatsBooked), bookedSeats}, showDateTime(date, showTimes[timeId-1]));
              new BookingService().add(booking);
              System.out.println("Booked Details");
-        }else{
-            System.out.println("Sorry this movie is not available ");
-        }        
-        } catch (AppException e) {
-			throw e;
-		} catch (Exception e) {
-			throw new AppException(ErrorCode.ERR01, e);
-		}
-        
+        }
     }
     
     public static void timeBook(String[] showTimes, long theaterId, int screenId, String date, Screen screen)throws ParseException{
-        try(Scanner sc = new Scanner(System.in)){
+        Scanner sc = new Scanner(System.in);
             int i = 0;
             for(String showTime : showTimes) {
                 System.out.printf("%d.%s\t",++i,showTime);
@@ -320,15 +312,10 @@ public class BookTickets{
             }            
             int[] availSeats = new BookTickets().totalSeatsBooked(seats);
             System.out.printf("\tBookedSeats: %d\t\t Availble: %d\n",availSeats[0], availSeats[1]);
-        } catch (AppException e) {
-			throw e;
-		} catch (Exception e) {
-			throw new AppException(ErrorCode.ERR02, e);
-		}
     }
     
-   public static void availableTickets(){
-        try(Scanner sc = new Scanner(System.in)){
+   public static void availableTickets() throws ParseException{
+        Scanner sc = new Scanner(System.in);
             System.out.println("\t\t\tMovieName\tToatalNoOfSeats each shows");                        
             int id =0;
             for (Theater theater: new TheaterService().readAll()){
@@ -363,15 +350,10 @@ public class BookTickets{
             }else{
                 timeBook(screen.getShowTimes(), theaterId, screenId, date, screen);
             }
-        } catch (AppException e) {
-			throw e;
-		} catch (Exception e) {
-			throw new AppException(ErrorCode.ERR01, e);
-		}
     }
      
     public static void cancelTickets(long bookingId){
-        try(Scanner sc = new Scanner(System.in)){
+        Scanner sc = new Scanner(System.in);
             Booking booking = new BookingService().read(bookingId);
         Theater theater = new TheaterService().read(booking.getTheaterId());
         long bookedScreenId = booking.getScreenId();
@@ -384,11 +366,6 @@ public class BookTickets{
                 System.out.println(Arrays.toString(s));   
         }
         new BookingService().delete(bookingId);
-        } catch (AppException e) {
-			throw e;
-		} catch (Exception e) {
-			throw new AppException(ErrorCode.ERR01, e);
-		}
         
     }
     

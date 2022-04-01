@@ -26,6 +26,7 @@ public class Booking {
         this.showDateTime = LocalDateTime.now();
         this.bookedDateTime = LocalDateTime.now();
     }
+    
     public Booking(long userId, long theaterId, long movieId, long screenId, String[] noOfBookedSeats, LocalDateTime showDateTime){        
         this.userId = userId;
         this.theaterId = theaterId;
@@ -55,6 +56,7 @@ public class Booking {
             return "-1";
         return str;
     }
+    
     public void printString(String seats[][]){
         for(String[] s : seats){
             System.out.println(Arrays.toString(s));
@@ -146,6 +148,6 @@ public class Booking {
     public String toString(){         
          return new StringBuilder().append(bookingId).append("\t\t").append(noOfBookedSeats[0]).append(" ").append(noOfBookedSeats[1]).append("\t\t").append(theaterId)
          .append("\t\t").append(movieId).append("\t\t").append(screenId).append("\t")
-         .append(showDateTime.format(DateTimeFormatter.ofPattern("yyyy-mm-dd hh:mm:ss a"))).append("\t").append(bookedDateTime.format(DateTimeFormatter.ofPattern("yyyy-mm-dd hh:mm:ss a"))).toString();
+         .append(showDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss a"))).append("\t").append(bookedDateTime.format(DateTimeFormatter.ofPattern("yyyy-mm-dd hh:mm:ss a"))).toString();
      } //
 }

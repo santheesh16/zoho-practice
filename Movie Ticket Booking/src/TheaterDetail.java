@@ -20,7 +20,7 @@ public class TheaterDetail{
     static Theater theater;
    
     public static Screen addScreen(){
-        try(Scanner sc = new Scanner(System.in)){
+        Scanner sc = new Scanner(System.in);
             System.out.println("Enter the Screen details");
             System.out.println("Total No Of Seats:");
             int seats = sc.nextInt();
@@ -41,15 +41,10 @@ public class TheaterDetail{
             
             }
             return new Screen(seats, movie, showTimes);
-        } catch (AppException e) {
-			throw e;
-		} catch (Exception e) {
-			throw new AppException(ErrorCode.ERR02, e);
-		}
     }
     
     public static void addTheater(){
-        try(Scanner sc = new Scanner(System.in)){
+        Scanner sc = new Scanner(System.in);
             System.out.println("Enter the theater details");
             System.out.println("Theater name:");
             String theaterName = sc.nextLine();
@@ -69,16 +64,11 @@ public class TheaterDetail{
             theater = new Theater(theaterName, address, screens, movies, rating);
             theater.setTheaterId(new TheaterService().add(theater));
             System.out.println(theater);
-        } catch (AppException e) {
-			throw e;
-		} catch (Exception e) {
-			throw new AppException(ErrorCode.ERR02, e);
-		}
         
     }
     
     public static Address getAddress(){
-        try(Scanner sc = new Scanner(System.in)){
+        Scanner sc = new Scanner(System.in);
            System.out.println("Enter theater Addres Details:");
             System.out.print("Street:");
             String street = sc.nextLine();
@@ -91,15 +81,10 @@ public class TheaterDetail{
             System.out.print("Landmark:");
             String landmark = sc.nextLine(); 
             return new Address(street, city, state, pincode, landmark);
-        } catch (AppException e) {
-			throw e;
-		} catch (Exception e) {
-			throw new AppException(ErrorCode.ERR02, e);
-		}
     }
     
     public static Movie addMovie(){
-        try(Scanner sc = new Scanner(System.in)){
+        Scanner sc = new Scanner(System.in);
             System.out.println("Enter Movie Details:");
             System.out.println("MovieName:");
             String movieName = sc.nextLine();
@@ -109,18 +94,11 @@ public class TheaterDetail{
             System.out.println("MovieStatus:");
             String movieStatus = sc.nextLine();
             MovieStatus enumStatus = MovieStatus.valueOf(movieStatus);
-            
-        return new Movie(movieName, enumType, enumStatus);
-        } catch (AppException e) {
-			throw e;
-		} catch (Exception e) {
-			throw new AppException(ErrorCode.ERR02, e);
-		}
-        
+            return new Movie(movieName, enumType, enumStatus);
     }
     
-    public static void availableTickets() {
-        try(Scanner sc = new Scanner(System.in)){
+    public static void availableTickets() throws ParseException{
+        Scanner sc = new Scanner(System.in);
             System.out.println("\t\t\tMovieName\tToatalNoOfSeats each shows");                        
             int id =0;
             for (Theater theater: new TheaterService().readAll()){
@@ -155,15 +133,10 @@ public class TheaterDetail{
             }else{
                 timeBook(screen.getShowTimes(), theaterId, screenId, date, screen);
             }
-        } catch (AppException e) {
-			throw e;
-		} catch (Exception e) {
-			throw new AppException(ErrorCode.ERR02, e);
-		}
     }
     
-    public static void timeBook(String[] showTimes, long theaterId, int screenId, String date, Screen screen){
-        try(Scanner sc = new Scanner(System.in)){
+    public static void timeBook(String[] showTimes, long theaterId, int screenId, String date, Screen screen) throws ParseException{
+        Scanner sc = new Scanner(System.in);
             int i = 0;
             for(String showTime : showTimes) {
                 System.out.printf("%d.%s\t",++i,showTime);
@@ -183,16 +156,11 @@ public class TheaterDetail{
             }            
             int[] availSeats = new BookTickets().totalSeatsBooked(seats);
             System.out.printf("\tBookedSeats: %d\t\t Availble: %d\n",availSeats[0], availSeats[1]);
-        } catch (AppException e) {
-			throw e;
-		} catch (Exception e) {
-			throw new AppException(ErrorCode.ERR02, e);
-		}
         
     }
     
     public static void changeOrCreateScreen(){
-        try(Scanner sc = new Scanner(System.in)){
+        Scanner sc = new Scanner(System.in);
             for (Theater theater: new TheaterService().readAll()){
                 System.out.println(theater.getTheaterId()+"\t"+theater.getTheaterName());
             }
@@ -304,11 +272,6 @@ public class TheaterDetail{
                     System.out.println("Enter correct options plzz!!");
                 break;
             }
-        } catch (AppException e) {
-			throw e;
-		} catch (Exception e) {
-			throw new AppException(ErrorCode.ERR02, e);
-		}
         
     }
     
@@ -319,7 +282,9 @@ public class TheaterDetail{
         while(loop){
             System.out.println("------*---------*-----------*-------------*---------");
             System.out.println(" 1. Add New Theater\n 2. Add New Movie \n 3. Available Tickets \n 4. Booked Tickets \n 5. Exit");
-            int choice = sc.nextInt();
+            int choice = 0;
+            choice = sc.nextInt();
+            
             switch(choice){
                 case 1:
                 {
