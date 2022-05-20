@@ -1,0 +1,9 @@
+{
+    "java.project.sourcePaths": [
+        "WEB-INF/classes",
+        "src"
+    ],
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar"
+    ]
+}

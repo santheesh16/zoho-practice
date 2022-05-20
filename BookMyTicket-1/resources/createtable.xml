@@ -1,0 +1,282 @@
+<?xml version="1.0"?>
+<book_ticket>
+    <table-type name="movie_status_enum">
+        <column>
+            <value>Available</value>
+        </column>
+       <column>
+            <value>NotAvailable</value>
+        </column>
+    </table-type>
+    <table-type name="movie_type_enum">
+        <column>
+            <value>Tamil</value>
+        </column>
+       <column>
+            <value>English</value>
+        </column>
+        <column>
+            <value>Hindi</value>
+        </column>
+    </table-type>
+    <table name="users">
+        
+        <column>
+            <col-name>user_id</col-name>
+            <type>serial</type>
+            <size></size>
+            <state>PRIMARY KEY</state>
+            <constraints></constraints>
+        </column>
+        <column>
+            <col-name>role</col-name>
+            <type>VARCHAR </type>
+            <size>10</size>
+            <state>NOT NULL</state>
+            <constraints></constraints>
+        </column>
+        <column>
+            <col-name>username</col-name>
+            <type>VARCHAR</type>
+            <size>50</size>
+            <state>NOT NULL</state>
+            <constraints></constraints>
+        </column>
+        <column>
+            <col-name>mob_no</col-name>
+            <type>VARCHAR</type>
+            <size>20</size>
+            <state>NOT NULL</state>
+            <constraints></constraints>
+        </column>
+        <column>
+            <col-name>email_id</col-name>
+            <type>VARCHAR </type>
+            <size>50</size>
+            <state>NOT NULL</state>
+            <constraints></constraints>
+        </column>
+        <column>
+            <col-name>sex</col-name>
+            <type>VARCHAR</type>
+            <size>10</size>
+            <state>NOT NULL</state>
+            <constraints></constraints>
+        </column>
+       
+    </table>
+    <table name="address">
+        <column>
+            <col-name>address_id</col-name>
+            <type>serial</type>
+            <size></size>
+            <state>PRIMARY KEY</state>
+            <constraints></constraints>
+        </column>
+        <column>
+            <col-name>street</col-name>
+            <type>VARCHAR</type>
+            <size>100</size>
+            <state>NOT NULL</state>
+            <constraints></constraints>
+        </column>
+        <column>
+            <col-name>city</col-name>
+            <type>VARCHAR</type>
+            <size>100</size>
+            <state>NOT NULL</state>
+            <constraints></constraints>
+        </column>
+        <column>
+            <col-name>state</col-name>
+            <type>VARCHAR</type>
+            <size>100</size>
+            <state>NOT NULL</state>
+            <constraints></constraints>
+        </column>
+        <column>
+            <col-name>pincode</col-name>
+            <type>VARCHAR</type>
+            <size>20</size>
+            <state>NOT NULL</state>
+            <constraints></constraints>
+        </column>
+        <column>
+            <col-name>landmark</col-name>
+            <type>VARCHAR</type>
+            <size>100</size>
+            <state>NOT NULL</state>
+            <constraints></constraints>
+        </column>
+    </table>
+    <table name="movie">
+        <column>
+            <col-name>movie_id</col-name>
+            <type>serial</type>
+            <size></size>
+            <state>PRIMARY KEY</state>
+            <constraints></constraints>
+        </column>
+        <column>
+            <col-name>moviename</col-name>
+            <type>VARCHAR</type>
+            <size>100</size>
+            <state>NOT NULL</state>
+            <constraints></constraints>
+        </column>
+        <column>
+            <col-name>movie_type</col-name>
+            <type>movie_type_enum</type>
+            <size></size>
+            <state>NOT NULL</state>
+            <constraints></constraints>
+        </column>
+        <column>
+            <col-name>movie_status</col-name>
+            <type>movie_status_enum</type>
+            <size></size>
+            <state>NOT NULL</state>
+            <constraints></constraints>
+        </column>
+    </table>
+    <table name="screens">
+        <column>
+            <col-name>screen_id</col-name>
+            <type>serial</type>
+            <size></size>
+            <state>PRIMARY KEY</state>
+            <constraints></constraints>
+        </column>
+        <column>
+            <col-name>seats</col-name>
+            <type>integer</type>
+            <size></size>
+            <state>NOT NULL</state>
+            <constraints></constraints>
+        </column>
+        <column>
+            <col-name>screen_movie_id</col-name>
+            <type>integer</type>
+            <size></size>
+            <state>NOT NULL</state>
+            <constraints>CONSTRAINT fk_screen_movie foreign key (screen_movie_id) REFERENCES movie (movie_id)</constraints>
+        </column>
+        <column>
+            <col-name>show_times</col-name>
+            <type>text[]</type>
+            <size></size>
+            <state>NOT NULL</state>
+            <constraints></constraints>
+        </column>
+    </table>
+    <table name="theater">
+        <column>
+            <col-name>theater_id</col-name>
+            <type>serial</type>
+            <size></size>
+            <state>PRIMARY KEY</state>
+            <constraints></constraints>
+        </column>
+        <column>
+            <col-name>theater_name</col-name>
+            <type>VARCHAR</type>
+            <size>100</size>
+            <state>NOT NULL</state>
+            <constraints></constraints>
+        </column>
+        <column>
+            <col-name>theater_address_id</col-name>
+            <type>integer</type>
+            <size></size>
+            <state>NOT NULL</state>
+            <constraints>constraint fk_theater_address foreign key (theater_address_id) REFERENCES address (address_id)</constraints>
+        </column>
+        <column>
+            <col-name>screens_list</col-name>
+            <type>integer []</type>
+            <size></size>
+            <state></state>
+            <constraints></constraints>
+        </column>
+        <column>
+            <col-name>movies_list</col-name>
+            <type>integer []</type>
+            <size></size>
+            <state></state>
+            <constraints></constraints>
+        </column>
+        <column>
+            <col-name>rating</col-name>
+            <type>float4</type>
+            <size></size>
+            <state>NOT NULL</state>
+            <constraints></constraints>
+        </column>
+    </table>
+     <table name="booking">
+        <column>
+            <col-name>booking_id</col-name>
+            <type>serial</type>
+            <size></size>
+            <state>PRIMARY KEY</state>
+            <constraints></constraints>
+        </column>
+        <column>
+            <col-name>book_user_id</col-name>
+            <type>integer</type>
+            <size></size>
+            <state>NOT NULL</state>
+            <constraints>CONSTRAINT fk_book_user FOREIGN KEY(book_user_id) REFERENCES users(user_id)</constraints>
+        </column>
+        <column>
+            <col-name>book_theater_id</col-name>
+            <type>integer</type>
+            <size></size>
+            <state>NOT NULL</state>
+            <constraints>CONSTRAINT fk_book_address FOREIGN KEY(book_theater_id) REFERENCES theater(theater_id)</constraints>
+        </column>
+        <column>
+            <col-name>book_movie_id</col-name>
+            <type>integer</type>
+            <size></size>
+            <state>NOT NULL</state>
+            <constraints>CONSTRAINT fk_book_movie FOREIGN KEY(book_movie_id) REFERENCES movie(movie_id)</constraints>
+        </column>
+        <column>
+            <col-name>screen_no</col-name>
+            <type>integer</type>
+            <size></size>
+            <state>NOT NULL</state>
+            <constraints></constraints>
+        </column>
+        <column>
+            <col-name>booked_seats</col-name>
+            <type>text[]</type>
+            <size></size>
+            <state>NOT NULL</state>
+            <constraints></constraints>
+        </column>
+        <column>
+            <col-name>show_date_time</col-name>
+            <type>timestamp without time zone</type>
+            <size></size>
+            <state>default NULL</state>
+            <constraints></constraints>
+        </column>
+        <column>
+            <col-name>booked_date_time</col-name>
+            <type>timestamp without time zone</type>
+            <size></size>
+            <state>default NULL</state>
+            <constraints></constraints>
+        </column>
+    </table>
+    <link-table source="users">
+        <target>users1</target>
+        <target>users2</target>
+    </link-table>
+    <link-table source="address">
+        <target>address1</target>
+        <target>address2</target>
+    </link-table>
+</book_ticket>

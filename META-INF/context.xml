@@ -1,9 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<Context antiResourceLocking="false" privileged="true" >
-  <WatchedResource>WEB-INF/web.xml</WatchedResource>
-  <WatchedResource>WEB-INF/lib</WatchedResource>
-  <Realm className="org.apache.catalina.realm.JAASRealm"
-        appName="BookMyTicket-1"
-        userClassNames="com.zoho.booktickets.jaas.JAASUserPrincipal,com.zoho.booktickets.jaas.JAASPasswordPrincipal"
-        roleClassNames="com.zoho.booktickets.jaas.JAASRolePrincipal"/>
-</Context>
